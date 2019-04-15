@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   }
 }
 */
-
+/*
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -99,9 +99,9 @@ void main() {
     home: MyScaffold(),
   ));
 }
+*/
 
 
-/*
 import 'package:flutter/material.dart';
 
 void main() {
@@ -143,4 +143,3 @@ class TutorialHome extends StatelessWidget {
     );
   }
 }
-*/
