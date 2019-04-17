@@ -110,35 +110,34 @@ void main() {
     home: TutorialHome(),
   ));
 }
+class CounterDisplay extends StatelessWidget {
+  CounterDisplay({this.count});
 
-class MyButton extends StatelessWidget {
+  final int count;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print('MyButton was tapped!');
-      },
-      child: Container(
-        height: 36.0,
-        padding: const EdgeInsets.all(8.0),
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: Colors.lightGreen[500],
-        ),
-        child: Center(
-          child: Text('Engage'),
-        ),
-      ),
+    return Text('Count: $count',
+    style: TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class CounterIncrementor extends StatelessWidget {
+  CounterIncrementor({this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: onPressed,
+      child: Text('Increment'),
     );
   }
 }
 
 class Counter extends StatefulWidget {
-  // This class is the configuration for the state. It holds the
-  // values (in this case nothing) provided by the parent and used by the build
-  // method of the State. Fields in a Widget subclass are always marked "final".
-
   @override
   _CounterState createState() => _CounterState();
 }
@@ -148,32 +147,19 @@ class _CounterState extends State<Counter> {
 
   void _increment() {
     setState(() {
-      // This call to setState tells the Flutter framework that
-      // something has changed in this State, which causes it to rerun
-      // the build method below so that the display can reflect the
-      // updated values. If we changed _counter without calling
-      // setState(), then the build method would not be called again,
-      // and so nothing would appear to happen.
-      _counter++;
+      ++_counter;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance
-    // as done by the _increment method above.
-    // The Flutter framework has been optimized to make rerunning
-    // build methods fast, so that you can just rebuild anything that
-    // needs updating rather than having to individually change
-    // instances of widgets.
-    return Row(
-      children: <Widget>[
-        RaisedButton(
-          onPressed: _increment,
-          child: Text('Increment'),
-        ),
-        Text('Count: $_counter'),
-      ],
+    return Container(
+        margin: const EdgeInsets.only(top: 50),
+        child:
+          Column(children: <Widget>[
+            CounterDisplay(count: _counter),
+            CounterIncrementor(onPressed: _increment),
+          ])
     );
   }
 }
@@ -181,41 +167,12 @@ class _CounterState extends State<Counter> {
 class TutorialHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Scaffold is a layout for the major Material Components.
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          tooltip: 'Navigation menu',
-          onPressed: ()
-          {
-            print('nav menu');
-          },
-        ),
-        title: Text('Example title'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: ()
-            {
-              print('search button');
-            },
-          ),
-        ],
-      ),
-      // body is the majority of the screen.
-      body:  Counter(),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add', // used by assistive technologies
-        child: Icon(Icons.add),
-        onPressed: ()
-        {
-          print('add button');
-        },
-      ),
-      bottomNavigationBar:
-        MyButton(),
+    return Container(
+      margin: const EdgeInsets.only(top: 50),
+      decoration: BoxDecoration(color: Colors.black38 ),
+      child:
+          Counter(),
+
     );
   }
 }
