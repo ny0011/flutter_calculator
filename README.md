@@ -1,3 +1,4 @@
+10/0/5
 # 계산기 by solocoding2019_base
 
 ## 요구사항
