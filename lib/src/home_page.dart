@@ -6,68 +6,100 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
-  var num1 = '0', num2 = '0', operator='', flag=0, ansStr='0';
-  var num = [], numIndex = 0;
+  var numTmp='', index = 0, flag=0, ansStr='0';
+  var num = List(), operator = List();
 
   _varClear(){
-    num1 = '0'; num2 = '0'; operator = ''; flag = 0;
+    numTmp=''; index=0; flag = 0;
+    num.clear(); operator.clear();
   }
+
+  dynamic _calculate(var operand1, var operand2, String oper){
+    if(oper == '*')
+        return operand1 * operand2;
+    else if (oper == '/')
+        return operand1 / operand2;
+    else if (oper == '+')
+      return operand1 + operand2;
+    else if (oper == '-')
+      return operand1 - operand2;
+
+  }
+
   _display(){
     setState(() {
+      num.add(numTmp);
+      var ans = int.parse(num[0]);
       if (flag == 1) {
-        switch (operator) {
-          case '*':
-            ansStr = (int.parse(num1) * int.parse(num2)).toString();
-            _varClear();
-            break;
-          case '/':
-            ansStr = (int.parse(num1) / int.parse(num2)).toString();
-            _varClear();
-          break;
-          case '-':
-            ansStr = (int.parse(num1) - int.parse(num2)).toString();
-            _varClear();
-            break;
-          case '+':
-            ansStr = (int.parse(num1) + int.parse(num2)).toString();
-            _varClear();
-            break;
+        for(int i=0; i<index; i++){
+          ans = _calculate(ans, int.parse(num[i+1]), operator[i]);
         }
+        ansStr="$ans";
+        _varClear();
       }
-    });
-  }
-  _div(){
-    setState(() {
-      operator='/';
-      flag=1;
-      num2=ansStr;
-      num1='';
-    });
-  }
-  _add(){
-    setState(() {
-      operator='+';
-      flag=1;
-      num2=ansStr;
-      num1='';
-    });
-  }
-  _sub(){
-    setState(() {
-      operator='-';
-      flag=1;
-      num2=ansStr;
-      num1='';
     });
   }
   _mul(){
     setState(() {
-      operator='*';
-      flag=1;
-      num2=ansStr;
-      num1='';
+      if (numTmp == ''){
+        if (index != 0)
+          operator.replaceRange(index-1,index,['*']);
+          print(operator);
+      }else{
+        operator.add('*');
+        num.add(numTmp);
+        numTmp='';
+        index++;
+        flag=1;
+      }
     });
   }
+  _div() {
+    setState(() {
+      if (numTmp == ''){
+        if (index != 0)
+          operator.replaceRange(index-1,index,['/']);
+        print(operator);
+      }else {
+        operator.add('/');
+        num.add(numTmp);
+        numTmp = '';
+        index++;
+        flag = 1;
+      }
+    });
+  }
+  _add(){
+    setState(() {
+      if (numTmp == ''){
+        if (index != 0)
+          operator.replaceRange(index-1,index,['+']);
+        print(operator);
+      } else {
+        operator.add('+');
+        num.add(numTmp);
+        numTmp = '';
+        index++;
+        flag = 1;
+      }
+    });
+  }
+  _sub(){
+    setState(() {
+      if (numTmp == ''){
+        if (index != 0)
+          operator.replaceRange(index-1,index,['-']);
+        print(operator);
+      } else {
+        operator.add('-');
+        num.add(numTmp);
+        numTmp = '';
+        index++;
+        flag = 1;
+      }
+    });
+  }
+  
 
   _clear(){
     setState(() {
@@ -77,73 +109,74 @@ class HomePageState extends State<HomePage>{
   }
   _zero(){
     setState(() {
-      num1 += "0";
-      ansStr = int.parse(num1).toString();
+      numTmp += "0";
+      ansStr = int.parse(numTmp).toString();
       print("0 touched!");
     });
   }
   _one(){
     setState(() {
-      num1 += "1";
-      ansStr = int.parse(num1).toString();
+      numTmp += "1";
+      print("$index, $num");
+      ansStr = int.parse(numTmp).toString();
       print("1 touched!");
     });
   }
 
   _two(){
     setState(() {
-      num1 += "2";
-      ansStr = int.parse(num1).toString();
+      numTmp += "2";
+      ansStr = int.parse(numTmp).toString();
       print("2 touched!");
     });
   }
 
   _three(){
     setState(() {
-      num1 += "3";
-      ansStr = int.parse(num1).toString();
+      numTmp += "3";
+      ansStr = int.parse(numTmp).toString();
       print("3 touched!");
     });
   }
   _four(){
     setState(() {
-      num1 += "4";
-      ansStr = int.parse(num1).toString();
+      numTmp += "4";
+      ansStr = int.parse(numTmp).toString();
       print("4 touched!");
     });
   }
   _five(){
     setState(() {
-      num1 += "5";
-      ansStr = int.parse(num1).toString();
+      numTmp += "5";
+      ansStr = int.parse(numTmp).toString();
       print("five touched!");
     });
   }
   _six(){
     setState(() {
-      num1 += "6";
-      ansStr = int.parse(num1).toString();
+      numTmp += "6";
+      ansStr = int.parse(numTmp).toString();
       print("six touched!");
     });
   }
   _seven(){
     setState(() {
-      num1 += "7";
-      ansStr = int.parse(num1).toString();
+      numTmp += "7";
+      ansStr = int.parse(numTmp).toString();
       print("7 touched!");
     });
   }
   _eight(){
     setState(() {
-      num1 += "8";
-      ansStr = int.parse(num1).toString();
+      numTmp += "8";
+      ansStr = int.parse(numTmp).toString();
       print("8 touched!");
     });
   }
   _nine(){
     setState(() {
-      num1 += "9";
-      ansStr = int.parse(num1).toString();
+      numTmp += "9";
+      ansStr = int.parse(numTmp).toString();
       print("9 touched!");
     });
   }
