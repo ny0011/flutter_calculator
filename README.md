@@ -18,3 +18,6 @@
 * 기능
   * 손으로 버튼을 터치했을 때 빈 칸에 버튼이 눌린 기호가 무엇인지 표기한다
   * = 버튼을 누르면 연산을 실행한다
+
+## 참고 사이트
+https://medium.com/@harshil1712/lets-flutter-how-i-built-a-simple-calculator-with-flutter-41410b76a1aa

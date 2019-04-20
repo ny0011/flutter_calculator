@@ -99,9 +99,12 @@ void main() {
     home: MyScaffold(),
   ));
 }
+
+
+
 */
 
-
+/*
 import 'package:flutter/material.dart';
 
 void main() {
@@ -110,44 +113,50 @@ void main() {
     home: TutorialHome(),
   ));
 }
-class CounterDisplay extends StatelessWidget {
-  CounterDisplay({this.count});
+class CalculatorDisplay extends StatelessWidget {
+  CalculatorDisplay({this.count});
 
-  final int count;
+  final String count;
 
   @override
   Widget build(BuildContext context) {
     return Text('Count: $count',
-    style: TextStyle(fontWeight: FontWeight.bold),
+      style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 50.0
+      ),
+      textAlign: TextAlign.right,
     );
   }
 }
 
-class CounterIncrementor extends StatelessWidget {
-  CounterIncrementor({this.onPressed});
+class Calculator extends StatelessWidget {
+  Calculator({this.onPressed});
 
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: onPressed,
-      child: Text('Increment'),
-    );
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        _button("")
+      ],
+    )
   }
 }
 
-class Counter extends StatefulWidget {
+class CalculatorView extends StatefulWidget {
   @override
   _CounterState createState() => _CounterState();
 }
 
-class _CounterState extends State<Counter> {
-  int _counter = 0;
+class _CounterState extends State<CalculatorView> {
+  String _counter = '';
 
-  void _increment() {
+  void _increment(String inputString) {
     setState(() {
-      ++_counter;
+      _counter+=inputString;
     });
   }
 
@@ -157,8 +166,8 @@ class _CounterState extends State<Counter> {
         margin: const EdgeInsets.only(top: 50),
         child:
           Column(children: <Widget>[
-            CounterDisplay(count: _counter),
-            CounterIncrementor(onPressed: _increment),
+            CalculatorDisplay(count: _counter),
+            Calculator(onPressed: _increment()),
           ])
     );
   }
@@ -171,8 +180,25 @@ class TutorialHome extends StatelessWidget {
       margin: const EdgeInsets.only(top: 50),
       decoration: BoxDecoration(color: Colors.black38 ),
       child:
-          Counter(),
+          CalculatorView(),
 
+    );
+  }
+}
+*/
+
+import 'package:flutter/material.dart';
+import 'src/home_page.dart';
+
+void main() => runApp(new MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: "Calculator App",
+      theme: new ThemeData.dark(),
+      home: new HomePage(),
     );
   }
 }
